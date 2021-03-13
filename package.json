@@ -1,7 +1,6 @@
 {
   "name": "acc-http-test",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -10,7 +9,20 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.19.0",
     "cors": "^2.8.5",
-    "crypto": "^1.0.1"
-  }
+    "crypto": "^1.0.1",
+    "express": "^4.17.1"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gnapahcuna/ACC-Webhook.git"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/gnapahcuna/ACC-Webhook/issues"
+  },
+  "homepage": "https://github.com/gnapahcuna/ACC-Webhook#readme",
+  "description": ""
 }
