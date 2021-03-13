@@ -1,23 +1,26 @@
-const express = require("express");
-const bodyParser = require("body-parser");
-//addition module
-const cors = require("cors");
-const crypto = require("crypto");
-
-// Create express server app
-const app = express();
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+let express = require("express");
+let bodyParser = require("body-parser");
+let router = express.Router();
+let cors = require("cors");
+let app = express();
 app.use(cors());
 
-// Router
-app.post("/acc/webhook", async (req, res) => {
+// all of our routes will be prefixed with /api
+app.use("/cctv", bodyParser.json(), router); //[use json]
+app.use("/cctv", bodyParser.urlencoded({ extended: false }), router);
+
+router.route("/webhook").post((req, res) => {
   console.log("@@@ ----------- testApi -----------");
 
   if (verifyAuthorizationTokenHTTP(req)) {
     const data = extractPayloadHTTP(req);
     console.log(data);
+    res.status(200);
   }
+});
+
+router.route("/welcome").get((req, res) => {
+  res.status(200).send("Welcome to CCTV Webhook");
 });
 
 function extractPayloadHTTP(request) {
@@ -35,8 +38,5 @@ function verifyAuthorizationTokenHTTP(request) {
   return hashInBase64 === authHeader;
 }
 
-app.get("/acc", (req, res) => {
-  res.status(200).send("<h1> Welcome to my Server </h1>");
-});
-
+app.use("*", (req, res) => res.status(404).send("404 Not found"));
 app.listen(process.env.PORT || 80, () => console.log("Server is running"));
